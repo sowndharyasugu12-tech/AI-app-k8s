@@ -21,15 +21,19 @@ Stored in Docker Hub
 
 **4. Kubernetes Layer**
 Core Components in your project:
+
 🔹 Deployment
 Manages Pods
 Handles rolling updates
 Ensures replicas are running
+
 🔹 Pods
 Runs your AI application container
+
 🔹 Service
 Exposes application inside cluster
 Likely NodePort / LoadBalancer
+
 🔹 ConfigMap / Secrets (if used)
 Config values (API keys, endpoints)
 
