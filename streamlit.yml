@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamlit-ai-agent
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: streamlit-ai-agent
+  template:
+    metadata:
+      labels:
+        app: streamlit-ai-agent
+    spec:
+      containers:
+      - name: streamlit-agent
+        image: 9500588005/0517:ai-agent5
+        ports:
+        - containerPort: 8051
+        env:
+        - name: GOOGLE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: abu
+              key: chandan
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streamlit-service
+spec:
+  selector:
+    app: streamlit-ai-agent
+  ports:
+  - port: 8051        # Service port
+    targetPort: 8051  # Container port
+    nodePort: 30008   # External port
+  type: NodePort
+
